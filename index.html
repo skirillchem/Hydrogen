@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Водород — конспект для ЕГЭ</title>
+<style>
+  :root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --ink:#1d2733;
+    --muted:#5b6b7f;
+    --accent:#2f6fed;
+    --accent2:#12b886;
+    --warn:#f5b301;
+    --line:#e2e8f0;
+    --radius:14px;
+    --shadow:0 6px 24px rgba(23,43,77,.08);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+  }
+  header{
+    background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 45%,#12b886 100%);
+    color:#fff;
+    padding:56px 20px 44px;
+    text-align:center;
+  }
+  header h1{
+    margin:0 0 10px;
+    font-size:clamp(28px,4.5vw,46px);
+    letter-spacing:-.5px;
+  }
+  header p{
+    margin:0;
+    opacity:.9;
+    font-size:clamp(14px,2vw,18px);
+  }
+  .hero-badges{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+  }
+  .hero-badges span{
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35);
+    padding:6px 16px;
+    border-radius:999px;
+    font-size:15px;
+    font-weight:600;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;
+  }
+  nav .inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    gap:6px;
+    padding:10px 16px;
+    white-space:nowrap;
+  }
+  nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:999px;
+    transition:.2s;
+  }
+  nav a:hover{background:#eef3fd;color:var(--accent)}
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:32px 16px 80px;
+  }
+  section{
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:clamp(20px,3vw,34px);
+    margin-bottom:26px;
+    scroll-margin-top:76px;
+  }
+  section h2{
+    margin:0 0 18px;
+    font-size:clamp(20px,2.6vw,26px);
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  section h2::before{
+    content:"";
+    width:6px;
+    height:26px;
+    border-radius:4px;
+    background:linear-gradient(180deg,var(--accent),var(--accent2));
+    flex:none;
+  }
+  h3{
+    font-size:17px;
+    margin:24px 0 8px;
+    color:#16305c;
+  }
+  h3:first-of-type{margin-top:0}
+  p{margin:0 0 12px}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:7px}
+  code,.formula{
+    font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    background:#eef3fd;
+    color:#16305c;
+    padding:2px 7px;
+    border-radius:6px;
+    font-size:.95em;
+  }
+  .formula{display:inline-block;padding:4px 10px;font-weight:600}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+    margin:16px 0;
+  }
+  .tile{
+    background:#f8fafd;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px 18px;
+  }
+  .tile h4{margin:0 0 6px;font-size:15px;color:var(--accent)}
+  .tile p{margin:0;font-size:14px;color:var(--muted)}
+  .table-wrap{overflow-x:auto}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14.5px;
+    margin:12px 0 6px;
+    border-radius:10px;
+    overflow:hidden;
+  }
+  th,td{
+    padding:10px 12px;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    background:#eef3fd;
+    color:#16305c;
+    font-weight:700;
+    font-size:13.5px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+  tbody tr:hover{background:#f8fafd}
+  .reaction{
+    background:#f8fafd;
+    border-left:4px solid var(--accent2);
+    border-radius:0 10px 10px 0;
+    padding:12px 16px;
+    margin:10px 0;
+    font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:14.5px;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .reaction .cond{
+    color:var(--muted);
+font-size:.9em;
+  }
+  .fact{
+    background:linear-gradient(135deg,#eef7ff,#e9fbf3);
+    border-left:4px solid var(--accent);
+    border-radius:0 10px 10px 0;
+    padding:14px 18px;
+    margin:18px 0;
+    font-size:14.5px;
+    position:relative;
+  }
+  .fact::before{
+    content:"💡";
+    position:absolute;
+    left:-13px;
+    top:12px;
+    font-size:18px;
+  }
+  .fact strong{color:#16305c}
+  .note{
+    background:#fff9e6;
+    border-left:4px solid var(--warn);
+    border-radius:0 10px 10px 0;
+    padding:12px 16px;
+    margin:14px 0;
+    font-size:14.5px;
+  }
+  .exam-tag{
+    display:inline-block;
+    background:#e8fbf3;
+    color:#0b7a56;
+    border:1px solid #b7ecd6;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.6px;
+    padding:2px 8px;
+    border-radius:999px;
+    vertical-align:middle;
+    margin-left:8px;
+    text-transform:uppercase;
+  }
+  /* Мини-тест */
+  .quiz-q{
+    margin-bottom:18px;
+    padding:16px;
+    background:#f8fafd;
+    border:1px solid var(--line);
+    border-radius:12px;
+  }
+  .quiz-q p{font-weight:600;margin:0 0 10px}
+  .quiz-options{display:flex;flex-direction:column;gap:8px}
+  .quiz-options label{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    cursor:pointer;
+    padding:8px 12px;
+    border-radius:8px;
+    border:1.5px solid transparent;
+    transition:.15s;
+    font-size:14.5px;
+  }
+  .quiz-options label:hover{background:#eef3fd}
+  .quiz-options input{accent-color:var(--accent);width:16px;height:16px}
+  .quiz-options label.correct{background:#e8fbf3;border-color:#12b886}
+  .quiz-options label.wrong{background:#ffe9ec;border-color:#e35d6a}
+  .quiz-btn{
+    padding:11px 22px;
+    font-size:15px;
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(135deg,var(--accent),#1e3a8a);
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+    margin-right:10px;
+  }
+  .quiz-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(47,111,237,.3)}
+  .quiz-btn.ghost{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+  .quiz-result{
+    margin-top:16px;
+    font-size:16px;
+    font-weight:700;
+    color:#16305c;
+    display:none;
+  }
+  .quiz-result.show{display:block}
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    padding:0 16px 40px;
+  }
+  @media print{
+    nav{position:static}
+    section{box-shadow:none;border:1px solid #ddd;break-inside:avoid}
+    .quiz-btn{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Водород</h1>
+  <p>Конспект по неорганической химии · подготовка к ЕГЭ</p>
+  <div class="hero-badges">
+    <span>H · Z = 1</span>
+    <span>1s¹</span>
+    <span>M<sub>r</sub> = 2</span>
+  </div>
+</header>
+
+<nav>
+  <div class="inner">
+    <a href="#position">Положение в таблице</a>
+    <a href="#config">Электронная конфигурация</a>
+    <a href="#oxidation">Степени окисления</a>
+    <a href="#physical">Физические свойства</a>
+    <a href="#chemical">Химические свойства</a>
+    <a href="#obtaining">Получение</a>
+    <a href="#conclusion">Вывод</a>
+    <a href="#quiz">Мини-тест</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- 1. ПОЛОЖЕНИЕ -->
+<section id="position">
+  <h2>Положение в таблице Менделеева</h2>
+  <p>
+    Водород — первый элемент периодической системы, его атомный номер — <strong>1</strong>,
+    относительная атомная масса <strong>A<sub>r</sub> ≈ 1,008</strong>.
+    Занимает уникальное, <strong>двойственное</strong> положение в таблице:
+  </p>
+  <div class="grid">
+    <div class="tile">
+      <h4>I группа (главная подгруппа)</h4>
+      <p>Формально близок к щелочным металлам: один валентный электрон, может проявлять степень
+      окисления +1 и отдавать электрон.</p>
+    </div>
+    <div class="tile">
+      <h4>VII группа (главная подгруппа)</h4>
+      <p>Близок к галогенам: до завершения внешнего уровня не хватает одного электрона,
+      поэтому может принимать его, проявляя степень окисления −1.</p>
+    </div>
+    <div class="tile">
+      <h4>Вне групп</h4>
+      <p>Часто водород выносят отдельно (в левом верхнем углу), поскольку его свойства не совпадают полностью ни с металлами, ни с галогенами.</p>
+    </div>
+  </div>
+  <p>
+    Водород — самый распространённый элемент во Вселенной (≈ 75 % по массе),
+    на Земле в свободном виде встречается редко: в основном в составе воды, углеводородов,
+    минералов и живых организмов.
+  </p>
+  <div class="fact">
+    <strong>Факт.</strong> Водород — единственный элемент, у которого изотопы имеют
+    собственные имена и символы: протий <sup>1</sup>H (обычный), дейтерий <sup>2</sup>H (D),
+    тритий <sup>3</sup>H (T, радиоактивен). Тяжёлая вода D₂O используется в ядерных реакторах.
+  </div>
+</section>
+
+<!-- 2. ЭЛЕКТРОННАЯ КОНФИГУРАЦИЯ -->
+<section id="config">
+  <h2>Электронная конфигурация</h2>
+  <p>
+    Атом водорода содержит один электрон, который располагается на 1s-орбитали:
+  </p>
+  <p style="text-align:center;font-size:24px;">
+    <span class="formula">1s¹</span>
+  </p>
+  <ul>
+    <li>Водород — <strong>s-элемент</strong>, единственный не заполненный до конца 1s-подуровень.</li>
+    <li>Тип химической связи в простом веществе H₂ — <strong>ковалентная неполярная</strong>,
+      связь одинарная (σ).</li>
+    <li>Энергия связи H–H велика — <strong>≈ 436 кДж/моль</strong>, поэтому молекула H₂
+      термически устойчива.</li>
+    <li>В соединениях водород обычно образует <strong>одну</strong> ковалентную связь,
+      валентность его равна <strong>I</strong>.</li>
+  </ul>
+  <div class="fact">
+    <strong>Факт.</strong> Водород — самая лёгкая молекула во Вселенной. Молекулы H₂ движутся
+    настолько быстро, что гравитация Земли не может удержать их, поэтому в атмосфере
+    свободного водорода почти нет — он улетучивается в космос.
+  </div>
+</section>
+
+<!-- 3. СТЕПЕНИ ОКИСЛЕНИЯ -->
+<section id="oxidation">
+  <h2>Характерные степени окисления и валентность</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Степень окисления</th><th>Примеры соединений</th><th>Роль водорода</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>0</strong></td>
+          <td>H₂ — простое вещество</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>+1</strong></td>
+          <td>HCl, H₂O, H₂S, H₂SO₄, HNO₃, CH₄</td>
+          <td><strong>Восстановитель</strong></td>
+        </tr>
+        <tr>
+          <td><strong>−1</strong></td>
+          <td>NaH, CaH₂, LiH, KH (гидриды металлов)</td>
+          <td><strong>Окислитель</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Чаще всего водород проявляет степень окисления <strong>+1</strong>, поскольку отдаёт
+    единственный электрон. Отрицательная степень окисления возможна только в соединениях
+    с металлами, которые сильнее притягивают электрон.
+  </p>
+  <div class="note">
+    <strong>Запомните:</strong> водород — единственный элемент, который может быть
+    и восстановителем (со степенью +1), и окислителем (со степенью −1).
+  </div>
+</section>
+
+<!-- 4. ФИЗИЧЕСКИЕ СВОЙСТВА -->
+<section id="physical">
+  <h2>Физические свойства</h2>
+  <div class="grid">
+    <div class="tile"><h4>Агрегатное состояние</h4><p>Газ без цвета, запаха и вкуса</p></div>
+    <div class="tile"><h4>Плотность</h4><p>≈ 0,09 г/л — в 14,5 раза легче воздуха</p></div>
+    <div class="tile"><h4>Растворимость</h4><p>Плохо растворим в воде</p></div>
+    <div class="tile"><h4>Температура плавления</h4><p>−259 °C</p></div>
+    <div class="tile"><h4>Температура кипения</h4><p>−253 °C</p></div>
+    <div class="tile"><h4>Диффузия</h4><p>Обладает высокой способностью проникать в металлы</p></div>
+  </div>
+  <div class="note">
+    Молекула H₂ — <strong>неполярная</strong> и очень маленькая, поэтому газ почти
+    не растворяется в воде. Это используют, например, для сбора водорода методом
+    вытеснения воды.
+  </div>
+  <div class="fact">
+    <strong>Факт.</strong> Водород — единственный газ, который в быту легко взрывается при
+    малейшей искре («гремучий газ» — смесь H₂ и O₂). Именно поэтому в дирижаблях его
+    заменили на гелий после катастрофы «Гинденбурга» в 1937 году.
+  </div>
+</section>
+
+<!-- 5. ХИМИЧЕСКИЕ СВОЙСТВА -->
+<section id="chemical">
+  <h2>Химические свойства <span class="exam-tag">ЕГЭ</span></h2>
+  <p>
+    Водород — восстановитель в реакциях с неметаллами и большинством оксидов металлов,
+    и только окислитель в реакциях с активными металлами.
+  </p>
+
+  <h3>1. Реакции с неметаллами (водород — восстановитель)</h3>
+  <div class="reaction">2H₂ + O₂ → 2H₂O <span class="cond">(поджигание, взрыв)</span></div>
+  <div class="reaction">H₂ + Cl₂ → 2HCl <span class="cond">(свет, взрыв)</span></div>
+  <div class="reaction">N₂ + 3H₂ ⇄ 2NH₃ <span class="cond">(t, p, кат. Fe)</span></div>
+  <div class="reaction">H₂ + S ⇄ H₂S <span class="cond">(при нагревании)</span></div>
+  <div class="reaction">2H₂ + C ⇄ CH₄ <span class="cond">(t, кат. Ni)</span></div>
+
+  <h3>2. Восстановление металлов из оксидов (водород — восстановитель)</h3>
+  <div class="reaction">CuO + H₂ → Cu + H₂O <span class="cond">(при нагревании)</span></div>
+  <div class="reaction">Fe₂O₃ + 3H₂ → 2Fe + 3H₂O <span class="cond">(при нагревании)</span></div>
+  <div class="reaction">WO₃ + 3H₂ → W + 3H₂O <span class="cond">(t, восстановление тугоплавких металлов)</span></div>
+  <div class="note">
+    Восстановление оксидов используют для металлов, стоящих в ряду напряжений
+    правее Zn (Cu, Fe, W, Mo и др.). Для активных металлов (Na, K, Mg, Al)
+    водородное восстановление оксидов не применяют.
+  </div>
+
+  <h3>3. Реакции с активными металлами (водород — окислитель)</h3>
+  <div class="reaction">2Na + H₂ → 2NaH <span class="cond">(при нагревании)</span></div>
+  <div class="reaction">Ca + H₂ → CaH₂ <span class="cond">(t)</span></div>
+  <p>Гидриды активных металлов разлагаются водой:</p>
+  <div class="reaction">NaH + H₂O → NaOH + H₂↑</div>
+  <div class="reaction">CaH₂ + 2H₂O → Ca(OH)₂ + 2H₂↑</div>
+
+  <h3>4. Реакции с органическими веществами</h3>
+  <div class="reaction">C₂H₄ + H₂ → C₂H₆ <span class="cond">(t, кат. Ni или Pt)</span></div>
+  <div class="reaction">C₂H₂ + 2H₂ → C₂H₆ <span class="cond">(гидрирование)</span></div>
+
+  <div class="fact">
+    <strong>Факт.</strong> Реакция H₂ + Cl₂ на свету идёт по <em>цепному</em> механизму:
+    одна квант света запускает образование тысяч молекул HCl. Это классический пример
+    цепной реакции в ЕГЭ.
+  </div>
+</section>
+
+<!-- 6. ПОЛУЧЕНИЕ -->
+<section id="obtaining">
+  <h2>Способы получения <span class="exam-tag">ЕГЭ</span></h2>
+
+  <h3>В лаборатории</h3>
+  <p><strong>1. Взаимодействие металлов с кислотами</strong> (в аппарате Киппа):</p>
+  <div class="reaction">Zn + 2HCl → ZnCl₂ + H₂↑</div>
+  <div class="reaction">Fe + H₂SO₄ (разб.) → FeSO₄ + H₂↑</div>
+  <div class="note">
+    Металл должен стоять в ряду напряжений <strong>до</strong> водорода. Реакцию не проводят
+    с HNO₃ любой концентрации и с концентрированной H₂SO₄ — выделяется не H₂, а другие газы.
+  </div>
+
+  <p><strong>2. Взаимодействие активных металлов с водой:</strong></p>
+  <div class="reaction">2Na + 2H₂O → 2NaOH + H₂↑</div>
+  <div class="reaction">Ca + 2H₂O → Ca(OH)₂ + H₂↑</div>
+
+  <p><strong>3. Взаимодействие алюминия и цинка со щелочами:</strong></p>
+  <div class="reaction">2Al + 2NaOH + 6H₂O → 2Na[Al(OH)₄] + 3H₂↑</div>
+  <div class="reaction">Zn + 2KOH + 2H₂O → K₂[Zn(OH)₄] + H₂↑</div>
+
+  <h3>В промышленности</h3>
+  <p><strong>1. Паровая конверсия метана</strong> (основной метод):</p>
+  <div class="reaction">CH₄ + H₂O ⇄ CO + 3H₂ <span class="cond">(t, кат. Ni)</span></div>
+
+  <p><strong>2. Пиролиз метана</strong> (термическое разложение):</p>
+  <div class="reaction">CH₄ → C + 2H₂ <span class="cond">(t ≈ 1200 °C)</span></div>
+
+  <p><strong>3. Конверсия угля с водяным паром:</strong></p>
+  <div class="reaction">C + H₂O → CO + H₂ <span class="cond">(t)</span></div>
+
+  <p><strong>4. Электролиз воды</strong> (энергозатратный):</p>
+  <div class="reaction">2H₂O → 2H₂↑ + O₂↑ <span class="cond">(электрический ток)</span></div>
+
+  <div class="fact">
+    <strong>Факт.</strong> В 2023 году мировой спрос на водород превысил 95 млн тонн в год.
+    При этом почти весь он до сих пор получается из ископаемого топлива — «зелёный» водород (электролиз на возобновляемой энергии) составляет лишь несколько процентов.
+  </div>
+</section>
+
+<!-- 7. ВЫВОД -->
+<section id="conclusion">
+  <h2>Вывод</h2>
+  <p>
+    Водород — уникальный элемент с <strong>двойственным положением</strong> в периодической
+    системе и <strong>двойственной окислительно-восстановительной природой</strong>.
+    В подавляющем большинстве реакций он выступает <strong>восстановителем</strong>,
+    но с активными металлами образует гидриды, проявляя себя как <strong>окислитель</strong>.
+  </p>
+  <p>
+    Как простое вещество водород — самое лёгкое и самое распространённое во Вселенной.
+    Как химическое сырьё он незаменим для <strong>синтеза аммиака</strong> (процесс Габера),
+    получения <strong>соляной кислоты</strong>, метанола, гидрирования жиров и нефтепродуктов.
+    В металлургии он служит восстановителем при получении тугоплавких металлов.
+  </p>
+  <p>
+    В перспективе водород рассматривается как <strong>экологически чистое топливо</strong>:
+    при его сгорании образуется только вода. Именно поэтому водородная энергетика —
+    одно из ключевых направлений современной науки и техники.
+  </p>
+  <div class="note">
+    <strong>Главное для ЕГЭ:</strong> помнить про восстановительные свойства (с неметаллами
+    и оксидами металлов) и окислительные свойства (с активными металлами), а также
+    три ключевых лабораторных способа получения: металл + кислота, металл + вода,
+    металл + щёлочь.
+  </div>
+</section>
+
+<!-- 8. МИНИ-ТЕСТ -->
+<section id="quiz">
+  <h2>Мини-тест по пройденному</h2>
+  <div id="quizContainer"></div>
+  <button class="quiz-btn" onclick="checkQuiz()">Проверить</button>
+  <button class="quiz-btn ghost" onclick="resetQuiz()">Пройти заново</button>
+  <div class="quiz-result" id="quizResult"></div>
+</section>
+
+</main>
+
+<footer>
+  Конспект по неорганической химии · Водород · подготовка к ЕГЭ
+</footer>
+
+<script>
+/* ---------- Мини-тест ---------- */
+const questions = [
+  {
+    q: "Какая электронная конфигурация у атома водорода в основном состоянии?",
+    options: ["1s¹", "1s²", "2s¹", "1s¹2s¹"],
+    correct: 0
+  },
+  {
+    q: "В каком соединении водород проявляет степень окисления −1?",
+    options: ["HCl", "H₂O", "NaH", "H₂S"],
+    correct: 2
+  },
+  {
+    q: "При взаимодействии Zn с разбавленной HCl образуется:",
+    options: ["Cl₂", "H₂", "O₂", "HClO"],
+    correct: 1
+  },
+  {
+    q: "Какую роль играет водород в реакции CuO + H₂ → Cu + H₂O?",
+    options: ["Окислитель", "Восстановитель", "Катализатор", "Не участвует в ОВР"],
+    correct: 1
+  },
+  {
+    q: "Каким способом водород в промышленности не получают?",
+    options: [
+      "Паровой конверсией метана",
+      "Электролизом воды",
+      "Пиролизом метана",
+      "Разложением NaCl"
+    ],
+    correct: 3
+  },
+  {
+    q: "При взаимодействии алюминия с раствором щёлочи выделяется:",
+    options: ["O₂", "Cl₂", "H₂", "NH₃"],
+    correct: 2
+  }
+];
+
+const container = document.getElementById("quizContainer");
+
+function renderQuiz(){
+  container.innerHTML = questions.map((item, i) => `
+    <div class="quiz-q" data-q="${i}">
+      <p>${i+1}. ${item.q}</p>
+      <div class="quiz-options">
+        ${item.options.map((opt, j) => `
+          <label>
+            <input type="radio" name="q${i}" value="${j}">
+            <span>${opt}</span>
+          </label>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function checkQuiz(){
+  let score = 0;
+  let answered = 0;
+
+  questions.forEach((item, i) => {
+    const wrap = container.querySelector(`[data-q="${i}"]`);
+    const selected = wrap.querySelector(`input[name="q${i}"]:checked`);
+    const labels = wrap.querySelectorAll("label");
+
+    labels.forEach(l => l.classList.remove("correct","wrong"));
+
+    if (selected) {
+      answered++;
+      const chosen = Number(selected.value);
+      if (chosen === item.correct) {
+        score++;
+        labels[chosen].classList.add("correct");
+      } else {
+        labels[chosen].classList.add("wrong");
+        labels[item.correct].classList.add("correct");
+      }
+    } else {
+      labels[item.correct].classList.add("correct");
+ }
+  });
+
+  const res = document.getElementById("quizResult");
+  res.classList.add("show");
+
+  let msg = Правильных ответов: <strong>${score} из ${questions.length}</strong>.;
+  if (answered < questions.length) {
+    msg +=  Вы ответили на ${answered} из ${questions.length} вопросов — правильный ответ подсвечен зелёным.;
+  } else if (score === questions.length) {
+    msg += " Отлично! Материал усвоен.";
+  } else if (score >= 4) {
+    msg += " Хорошо! Стоит повторить пару моментов.";
+  } else {
+    msg += " Стоит перечитать разделы про степени окисления и получение.";
+  }
+
+  res.innerHTML = msg;
+  res.scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+function resetQuiz(){
+  renderQuiz();
+  const res = document.getElementById("quizResult");
+  res.classList.remove("show");
+  res.innerHTML = "";
+  document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
+}
+
+renderQuiz();
+</script>
+
+</body>
+</html>
